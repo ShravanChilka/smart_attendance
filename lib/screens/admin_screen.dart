@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:smart_attendance/screens/screens_export.dart';
 import 'package:smart_attendance/services/database/models/class.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_attendance/widgets/styles.dart';
 import 'package:smart_attendance/widgets/widgets.dart';
 import '../providers/providers_export.dart';
 import '../services/database/models/attendance.dart';
+import 'login_screen_new.dart';
 
 class AdminScreen extends StatelessWidget {
   AdminScreen({Key? key}) : super(key: key);
@@ -116,7 +118,7 @@ class AdminScreen extends StatelessWidget {
           onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => LoginScreen(),
+                builder: (context) => const LoginScreen(),
               )),
           icon: const Icon(Icons.logout),
         ),
@@ -133,9 +135,13 @@ class AdminScreen extends StatelessWidget {
                     onTap: () => navigateToStartAttendance(
                         classModel: classListProvider.classList[index]),
                     title: Text(classListProvider.classList[index].name),
-                    leading: const Icon(
-                      Icons.class_rounded,
-                      color: Colors.orangeAccent,
+                    leading: ImageIcon(
+                      Image.asset(
+                        'assets/class_icon.png',
+                        fit: BoxFit.contain,
+                        filterQuality: FilterQuality.medium,
+                      ).image,
+                      color: Palette.secondary500,
                       size: 50,
                     ),
                   );

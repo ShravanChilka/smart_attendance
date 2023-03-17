@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_attendance/services/database/models/model_export.dart';
 import 'package:smart_attendance/widgets/custom_text_field.dart';
+import 'package:smart_attendance/widgets/styles.dart';
 import '../providers/loading_provider.dart';
 import '../services/location/location_service.dart';
 
@@ -26,7 +27,7 @@ class MarkAttendanceScreen extends StatelessWidget {
         content: Text(
           message,
         ),
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Palette.secondary500,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }

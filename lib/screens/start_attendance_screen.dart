@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_attendance/services/database/models/model_export.dart';
+import 'package:smart_attendance/widgets/styles.dart';
 import '../providers/providers_export.dart';
 import '../services/location/location_service.dart';
 
@@ -15,14 +16,13 @@ class StartAttendanceScreen extends StatelessWidget {
   static const _chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
   static Random random = Random();
 
-  String getRandomString(int length) =>
-      String.fromCharCodes(Iterable.generate(
-          length, (_) => _chars.codeUnitAt(random.nextInt(_chars.length))));
+  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+      length, (_) => _chars.codeUnitAt(random.nextInt(_chars.length))));
 
   @override
   Widget build(BuildContext context) {
     final attendanceStatusProvider =
-    Provider.of<AttendanceStatusProvider>(context);
+        Provider.of<AttendanceStatusProvider>(context);
     final userListProvider = Provider.of<UserListProvider>(context);
     final loadingProvider = Provider.of<LoadingProvider>(context);
 
@@ -51,28 +51,26 @@ class StartAttendanceScreen extends StatelessWidget {
     void syncClickEvent({required ClassModel classModel}) async {
       loadingProvider.isLoading = true;
       userListProvider.userList =
-      await AttendanceHelper().getUserByClassId(classId: classModel.id);
+          await AttendanceHelper().getUserByClassId(classId: classModel.id);
       loadingProvider.isLoading = false;
     }
 
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(classModel.name),
         actions: [
           loadingProvider.isLoading
               ? Center(
-            child: Container(
-                margin: const EdgeInsets.only(right: 16),
-                width: 24,
-                height: 24,
-                child: const CircularProgressIndicator()),
-          )
+                  child: Container(
+                      margin: const EdgeInsets.only(right: 16),
+                      width: 24,
+                      height: 24,
+                      child: const CircularProgressIndicator()),
+                )
               : IconButton(
-              onPressed: () => syncClickEvent(classModel: classModel),
-              icon: const Icon(Icons.sync))
+                  onPressed: () => syncClickEvent(classModel: classModel),
+                  icon: const Icon(Icons.sync))
         ],
       ),
       body: Padding(
@@ -80,8 +78,7 @@ class StartAttendanceScreen extends StatelessWidget {
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: () =>
-              classModel.isStarted
+              onPressed: () => classModel.isStarted
                   ? stopAttendanceClickEvent(classModel: classModel)
                   : startAttendanceClickEvent(classModel: classModel),
               child: SizedBox(
@@ -91,37 +88,45 @@ class StartAttendanceScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8, bottom: 8),
                     child: attendanceStatusProvider.classModel.isStarted
                         ? const Text("Stop Attendance",
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w600))
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.w600))
                         : const Text("Start Attendance",
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w600)),
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.w600)),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("OTP", style: TextStyle(
+                const Text(
+                  "OTP",
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  attendanceStatusProvider.classModel.otp,
+                  style: const TextStyle(
                     fontSize: 26,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),),
-                Text(attendanceStatusProvider.classModel.otp, style: const TextStyle(
-                    fontSize: 26,
-                    color: Colors.orangeAccent,
-                    fontWeight: FontWeight.bold),),
+                    fontWeight: FontWeight.bold,
+                    color: Palette.secondary500,
+                  ),
+                ),
               ],
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Expanded(
               child: ListView.builder(
                 itemCount: userListProvider.userList.length,
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: const CircleAvatar(
-                        backgroundColor: Colors.orangeAccent,
+                        backgroundColor: Palette.primary500,
                         child: Icon(Icons.person)),
                     title: Text(userListProvider.userList[index].name),
                     subtitle: Text(userListProvider.userList[index].email),

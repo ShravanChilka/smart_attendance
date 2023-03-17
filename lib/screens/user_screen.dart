@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:smart_attendance/screens/screens_export.dart';
 import 'package:smart_attendance/services/database/models/model_export.dart';
 import '../providers/providers_export.dart';
+import '../widgets/styles.dart';
+import 'login_screen_new.dart';
 
 class UserScreen extends StatelessWidget {
   final UserModel userModel;
@@ -43,7 +45,7 @@ class UserScreen extends StatelessWidget {
           onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => LoginScreen(),
+                builder: (context) => const LoginScreen(),
               )),
           icon: const Icon(Icons.logout),
         ),
@@ -62,7 +64,7 @@ class UserScreen extends StatelessWidget {
                     title: Text(classListProvider.classList[index].name),
                     leading: const Icon(
                       Icons.class_rounded,
-                      color: Colors.orangeAccent,
+                      color: Palette.primary500,
                       size: 50,
                     ),
                   );

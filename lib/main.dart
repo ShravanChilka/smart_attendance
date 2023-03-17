@@ -6,6 +6,8 @@ import 'package:smart_attendance/providers/class_list_provider.dart';
 import 'package:smart_attendance/providers/loading_provider.dart';
 import 'package:smart_attendance/providers/user_list_provider.dart';
 import 'package:smart_attendance/screens/login_screen.dart';
+import 'package:smart_attendance/screens/login_screen_new.dart';
+import 'package:smart_attendance/widgets/styles.dart';
 import 'services/database/g_sheet_api_service.dart';
 
 void main() async {
@@ -29,11 +31,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.orange,
-          floatingActionButtonTheme: const FloatingActionButtonThemeData(
-              backgroundColor: Colors.orangeAccent)),
+      theme: themeConfig,
       home: const SplashScreen(),
     );
   }
@@ -46,9 +44,9 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedSplashScreen(
-        backgroundColor: Colors.orangeAccent,
+        // backgroundColor: Palette.primary500,
         animationDuration: const Duration(seconds: 1),
-        nextScreen: LoginScreen(),
+        nextScreen: const LoginScreen(),
         splash: const Center(
           child: Text(
             "Smart Attendance",

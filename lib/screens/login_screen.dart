@@ -6,8 +6,10 @@ import 'package:smart_attendance/screens/screens_export.dart';
 import 'package:smart_attendance/services/database/models/model_export.dart';
 import 'package:smart_attendance/widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+import '../widgets/styles.dart';
+
+class LoginScreenOld extends StatelessWidget {
+  LoginScreenOld({Key? key}) : super(key: key);
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -22,7 +24,7 @@ class LoginScreen extends StatelessWidget {
         content: Text(
           message,
         ),
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Palette.primary500,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
@@ -108,7 +110,7 @@ class LoginScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.w900,
-                                  color: Colors.orangeAccent,
+                                  color: Palette.primary500,
                                   fontFamily: GoogleFonts.poppins().fontFamily,
                                 ),
                               ),
@@ -116,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                                 margin: const EdgeInsets.only(left: 20),
                                 height: 2,
                                 width: 50,
-                                color: Colors.orangeAccent,
+                                color: Palette.primary500,
                                 duration: const Duration(milliseconds: 800),
                                 curve: Curves.fastOutSlowIn,
                               )
